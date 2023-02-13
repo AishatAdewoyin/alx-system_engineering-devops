@@ -1,0 +1,2 @@
+#!/bin/bash
+iacta_contents=( $(cat iacta) ), third_line=${iacta_contents[2]}, echo third_line
