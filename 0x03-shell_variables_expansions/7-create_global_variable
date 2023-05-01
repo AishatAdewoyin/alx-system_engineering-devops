@@ -1,3 +1,10 @@
 #!/bin/bash
 
-export BEST="School"
+# Set the binary value of BEST
+export BEST="1101"
+
+# Convert binary to decimal using echo and ibase
+DECIMAL=$(echo "ibase=2; $BEST" | bc)
+
+# Print the decimal value of BEST
+echo $DECIMAL
