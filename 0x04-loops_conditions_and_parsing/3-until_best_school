@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Script that displays "Best School" 10 times using an until loop.
+
+# Defining string to be displayed
+message="Best School"
+
+# Setting a counter variable to keep track of iterations
+counter=0
+
+# Using until loop to display the message 10 times
+until [ "$counter" -ge 10 ]; do
+	echo "$message"
+	((counter++))
+done
