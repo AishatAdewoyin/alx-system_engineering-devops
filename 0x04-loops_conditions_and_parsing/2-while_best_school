@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# The script that displays "Best School" 10 times using a while loop.
+
+# String to be displayed
+message="Best School"
+
+# Setting a counter variable to keep track of iterations
+counter=1
+
+# A while loop to display the message 10 times
+while [ "$counter" -le 10 ]; do
+	echo "$message"
+	((counter++))
+done
+
