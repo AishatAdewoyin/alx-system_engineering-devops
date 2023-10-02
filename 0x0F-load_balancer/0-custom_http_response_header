@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# This cofigures web-01 to be like web-02 and set custom headers
+# Install Nginx
+sudo apt update
+sudo apt -y install nginx
+
+# Create a custom page
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Create redirection for /redirect_me
+sudo sed -i "/^\tlocation \/ {/a \ \t\trewrite ^/redirect_me \$scheme://youtube.com/@ConquerorDevs?si=FnVhOo1Z-EHSWxbQ permanent;" /etc/nginx/sites-available/default
+
+# Create custom 404 settings and custom 404 page
+echo -e "\n\terror_page 404 /custom_404.html;\n\n\tlocation = /custom_404.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}" | sudo tee mysettings > /dev/null
+sudo sed -i "/^\tserver_name _;/r mysettings" /etc/nginx/sites-available/default
+rm mysettings
+echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/custom_404.html > /dev/null
+
+# Create custom HTTP header identifying server hostname
+hostname=$(hostname)
+sudo sed -i "/^\tlocation \/ {/a \ \t\tadd_header X-Served-By \"$hostname\";" /etc/nginx/sites-available/default
+unset hostname
+
+# Allow HTTP connection through the firewall
+sudo ufw allow 'Nginx HTTP'
+
+# Start and restart Nginx
+sudo service nginx start
+sudo service nginx restart
