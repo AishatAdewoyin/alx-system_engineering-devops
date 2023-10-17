@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#  Bash script that retrieves DNS information for a specific domain and subdomain.
+# This bash script retrieves DNS information for a specified domain and subdomain.
 # A script function that checks domain.
 function check_domain {
 	domain_names=("www" "lb-01" "web-01" "web-02")
